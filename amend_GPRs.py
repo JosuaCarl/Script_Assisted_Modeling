@@ -8,7 +8,8 @@ import memote
 from bioservices.kegg import KEGG
 
 '''
-Usage: amend_GPRs.py <path_input-file> <path_output-file> <path_output-memote> <path GFF file>
+Usage: amend_GPRs.py <path_input_sbml-file> <path_output_sbml-file> <path GFF file> <path_output-memote>
+Adds Gene Protein Reaction rules to model. Based on heavy heuristics (naming).
 '''
 
 

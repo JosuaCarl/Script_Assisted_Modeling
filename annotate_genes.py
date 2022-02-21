@@ -8,7 +8,8 @@ from bioservices.kegg import KEGG
 import gffpandas.gffpandas as gffpd
 
 '''
-Usage: annotate_genes.py <path_input-file> <path_output-file> <path_tsv-file> <path_tsv-file-mismatches>  <path-GFF File> 
+Usage: annotate_genes.py <path_input_sbml-file> <path_output_sbml-file> <path-GFF File> <path_memote-report> <name_organism>
+Adds annotations from KEGG and SBO Terms to genes.
 '''
 
 
@@ -22,6 +23,7 @@ def main(args):
     outfile = args[2]
     gff_file = args[3]
     memote_report = args[4]
+    organism_name = args[5]
 
     if not os.path.exists(infile):
         print("[Error] %s : No such file." % infile)
@@ -34,7 +36,7 @@ def main(args):
     kegg = KEGG()
 
     # find organism
-    req = kegg.lookfor_organism('finegoldia magna')[0].split(' ')
+    req = kegg.lookfor_organism(organism_name)[0].split(' ')
     entry = req[0]  # 'T00661'
     org_id = req[1]  # 'fma'
     sbo_nr = "SBO:0000243"

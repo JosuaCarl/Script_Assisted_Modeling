@@ -9,7 +9,9 @@ import memote
 from bioservices.kegg import KEGG
 
 '''
-Usage: add_reactions_metabolites_from_genes.py <path_input-file> <path_output-file> <path_output-tsv>
+Usage: add_reactions_metabolites_from_genes.py <path_input_sbml-file> <path_output_sbml-file>
+<path_output_tsv-file_mismatches_bigg> <path_output_tsv-file_mismatches_locus-tags>
+<path_memote-report>
 '''
 
 

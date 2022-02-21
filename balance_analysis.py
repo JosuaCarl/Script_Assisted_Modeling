@@ -7,9 +7,10 @@ from tqdm import tqdm
 import helper_functions as hf
 
 '''
-Usage: balance_analysis.py <path_input-file> <path_output>
-The output is a .csv-format table with the columns: "model_index", "imbalances", "reaction_string", "frequent_compound"
-The last row of the table contains a list of compounds that consistently produce the same problem
+Usage: balance_analysis.py <path_input_sbml-file> <path_output_tsv-file_imbalances>
+The output is a .tsv-format table with the columns: "model_index", "reaction_name", "imbalances",
+"reaction_string", "formulas", "frequent_compound"
+The last row of the table contains a list of compounds that consistently produce the same problem.
 '''
 
 

@@ -4,8 +4,8 @@ import libsbml
 from tqdm import tqdm
 
 '''
-Usage: annotate_links_from_mp.py <path_model-polisher-file> <path_output> <program_name> <program_version>
-Extracts annotations form ModelPolisher file and adds it to previous file
+Usage: annotate_links_from_mp.py <path_model-polisher_sbml-file> <path_input_sbml-file> <path_output_sbml-file>
+Extracts annotations form ModelPolisher file and adds it to previous file.
 '''
 
 
@@ -19,8 +19,6 @@ def main(args):
     infile_mp = args[1]
     infile_of = args[2]
     outfile = args[3]
-    program_name = args[4]
-    program_version = args[5]
 
     if not os.path.exists(infile_mp):
         print("[Error] %s : No such file." % infile_mp)
@@ -89,8 +87,6 @@ def main(args):
 
     # Saving new model
     doc_nf.setModel(model_nf)
-    writer.setProgramName(program_name)
-    writer.setProgramVersion(program_version)
     writer.writeSBML(doc_nf, outfile)
 
 

@@ -6,7 +6,17 @@ import pandas as pd
 import helper_functions as hf
 
 '''
-Usage: amend_formulas.py <path_input-file> <path_output-file> <infile-csv> <program_name> <program_version> 
+Usage: amend_formulas.py <path_input_sbml-file> <path_output_sbml-file> <path_infile-csv_balancing_changes>
+Used, to balance a model through a manually curated list in csv format. 
+
+The csv table must be structured as follows: id,	change_type,	old,	new,	foundation,	db_id,	notes,	eco
+The entry of an eco_term or additional notes is optional.  
+The id must correspond to a metabolite or reaction id in the model.
+The change_type can be one of: [charge, formula] for metabolites and [product, reactant] for reactions
+The old field will be transferred into notes as a change note.
+The new field is the new value, which will be implemented into the model. It must correspond to a formula/charge for 
+metabolites and have the format <number> <compound> (e.g. 1 h_c, or 200 fe_rd_e) for reaction changes.
+As a foundation, a database can be given with a corresponding id in db_id. An entry is not optional.
 '''
 
 
@@ -19,8 +29,6 @@ def main(args):
     infile = args[1]
     outfile = args[2]
     infile_csv = args[3]
-    program_name = args[4]
-    program_version = args[5]
 
     if not os.path.exists(infile):
         print("[Error] %s : No such file." % infile)
@@ -119,8 +127,6 @@ def main(args):
 
     # Saving new model
     doc.setModel(model)
-    writer.setProgramName(program_name)
-    writer.setProgramVersion(program_version)
     writer.writeSBML(doc, outfile)
 
 

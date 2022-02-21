@@ -2,11 +2,10 @@ import sys
 import os
 import libsbml
 from tqdm import tqdm
-import pandas as pd
-import helper_functions as hf
 
 '''
-Usage: clean_notes.py <path_input-file> <path_output-file> <infile-csv> <program_name> <program_version> 
+Usage: clean_notes.py <path_input_sbml-file> <path_output_sbml-file>
+Cleans the Notes Field of SBO-Terms, Charge and Formula entries, and transfers them into the Annotations field.
 '''
 
 
@@ -18,8 +17,6 @@ def main(args):
 
     infile = args[1]
     outfile = args[2]
-    program_name = args[3]
-    program_version = args[4]
 
     if not os.path.exists(infile):
         print("[Error] %s : No such file." % infile)
@@ -107,8 +104,6 @@ def main(args):
 
     # Saving new model
     doc.setModel(model)
-    writer.setProgramName(program_name)
-    writer.setProgramVersion(program_version)
     writer.writeSBML(doc, outfile)
 
 

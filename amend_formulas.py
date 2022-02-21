@@ -6,7 +6,8 @@ import pandas as pd
 import helper_functions as hf
 
 '''
-Usage: amend_formulas.py <path_input-file> <path_output-file> <outfile-csv> <program_name> <program_version> 
+Usage: amend_formulas.py <path_input_sbml-file> <path_output_sbml-file>
+<outfile-tsv_mismatches> 
 <tolerate_charge_hydrogen_balancing> : -chBal, if +1 charge should correspond to +1 H-atom
 Takes formulas from the notes field and fbc-plugin, if none are found, BiGG-DB is searched for a formula. 
 If multiple or no possibilities are given in BiGG, a csv-formatted table with these metabolites is returned.
@@ -21,9 +22,7 @@ def main(args):
 
     infile = args[1]
     outfile = args[2]
-    outfile_csv = args[3]
-    program_name = args[4]
-    program_version = args[5]
+    outfile_tsv = args[3]
 
     if not os.path.exists(infile):
         print("[Error] %s : No such file." % infile)
@@ -46,8 +45,6 @@ def main(args):
 
         # Set newly created model and write to file
         doc.setModel(model)
-        writer.setProgramName(program_name)
-        writer.setProgramVersion(program_version)
         writer.writeSBML(doc, outfile)
 
     doc = reader.readSBML(outfile)
@@ -79,12 +76,10 @@ def main(args):
 
     # Saving new model
     doc.setModel(model)
-    writer.setProgramName(program_name)
-    writer.setProgramVersion(program_version)
     writer.writeSBML(doc, outfile)
 
     # Exporting mismatches
-    mismatches.to_csv(outfile_csv)
+    mismatches.to_csv(outfile_tsv)
 
 
 if __name__ == '__main__':

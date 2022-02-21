@@ -10,7 +10,9 @@ from bioservices.kegg import KEGG
 import gffpandas.gffpandas as gffpd
 
 '''
-Usage: add_genes_from_kegg.py <path_input-file> <path_output-file> <path_tsv-file> <path_tsv-file-mismatches>  <path-GFF File> 
+Usage: add_genes_from_kegg.py <path_input_sbml-file> <path_output_sbml-file> 
+<path_tsv-file_current> <path_tsv_file_mismatches> <path_tsv_file_not_added>  
+<path-GFF File>  <path_memote_report> <name_organism>
 '''
 
 
@@ -27,6 +29,7 @@ def main(args):
     tsv_file_missing = args[5]
     gff_file = args[6]
     memote_report = args[7]
+    name_organism = args[8]
 
     if not os.path.exists(infile):
         print("[Error] %s : No such file." % infile)
@@ -39,7 +42,7 @@ def main(args):
     kegg = KEGG()
 
     # find organism
-    req = kegg.lookfor_organism('finegoldia magna')[0].split(' ')
+    req = kegg.lookfor_organism(name_organism)[0].split(' ')
     entry = req[0]  # 'T00661'
     org_id = req[1]  # 'fma'
     sbo_nr = "SBO:0000243"

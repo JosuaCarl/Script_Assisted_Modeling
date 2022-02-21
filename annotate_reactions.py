@@ -10,7 +10,9 @@ from bioservices.kegg import KEGG
 import helper_functions as hf
 
 '''
-Usage: annotate_reactions.py <path_input-file> <outfile-csv> <program_name> <program_version> 
+Usage: annotate_reactions.py <path_input_sbml-file> <path_output_sbml-file>
+<path_outfile-tsv_missing_bigg> <path_memote-report>
+Adds annotations to reactions.
 '''
 
 

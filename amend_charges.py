@@ -6,7 +6,8 @@ import pandas as pd
 import helper_functions as hf
 
 '''
-Usage: amend_charges.py <path_input-file> <path_output-file> <path_errors>
+Usage: amend_charges.py <path_input_sbml-file> <path_output_sbml-file>
+<path_out_tsv-file_mismatches>
 Transfers charges from Notes to the fbc-Plugin Annotation. If none is found, BiGG-DB is used for a search. If BiGG 
 contains multiple or no charges, the metabolite is returned as a csv-formatted file.
 '''
@@ -21,8 +22,6 @@ def main(args):
     infile = args[1]
     outfile = args[2]
     outfile_tsv = args[3]
-    program_name = args[4]
-    program_version = args[5]
 
     if not os.path.exists(infile):
         print("[Error] %s : No such file." % infile)
@@ -71,8 +70,6 @@ def main(args):
 
     # Saving new model
     doc.setModel(model)
-    writer.setProgramName(program_name)
-    writer.setProgramVersion(program_version)
     writer.writeSBML(doc, outfile)
 
     # Exporting mismatches

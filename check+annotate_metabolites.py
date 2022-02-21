@@ -9,10 +9,11 @@ from requests.exceptions import HTTPError, RequestException
 import helper_functions as hf
 
 '''
-Usage: check+annotate_metabolites.py <path_input-file> <outfile-csv> <program_name> <program_version> 
+Usage: check+annotate_metabolites.py <path_input_sbml-file> <outfile-csv> <program_name> <program_version> 
 <tolerate_charge_hydrogen_balancing> : -chBal, if +1 charge should correspond to +1 H-atom
 Takes formulas from the notes field and fbc-plugin, if none are found, BiGG-DB is searched for a formula. 
 If multiple or no possibilities are given in BiGG, a csv-formatted table with these metabolites is returned.
+Only searches info, but does not change the model.
 '''
 
 

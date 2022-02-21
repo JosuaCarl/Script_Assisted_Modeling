@@ -9,7 +9,8 @@ import helper_functions as hf
 from bioservices.kegg import KEGG
 
 '''
-Usage: add_genes_from_kegg.py <path_input-file> <path_output-file>
+Usage: add_genes_from_kegg.py <path_input_sbml-file> <path_output_sbml-file>
+<path_output_tsv-file_changes_pathways> <path_memote-report> <name_organism>
 '''
 
 
@@ -23,6 +24,7 @@ def main(args):
     outfile = args[2]
     outfile_tsv = args[3]
     memote_report = args[4]
+    name_organism = args[5]
 
     if not os.path.exists(infile):
         print("[Error] %s : No such file." % infile)
@@ -38,7 +40,7 @@ def main(args):
     model = doc.getModel()
 
     # find organism
-    req = kegg.lookfor_organism('finegoldia magna')[0].split(' ')
+    req = kegg.lookfor_organism(name_organism)[0].split(' ')
     org_id = req[1]  # 'fma'
 
     model_cobra = cobra.io.read_sbml_model(infile)
